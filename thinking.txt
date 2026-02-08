@@ -1,0 +1,50 @@
+how are llms able to understand human input whether it be english or any other language or code?
+-> first of all llms cannot understand human readable text (code/text). so there are layers which have thier own responsibilities to make sure
+user provided text is converted into llm understandable logic
+
+as we know every char has asci code for itself
+- so one thing we can do is just convert this text into ascii and fed to llm. but this is not an ideal/working solution, as asci code for example take a simple sentence
+"I build software" and conver to ascii
+
+"I build software"
+ASCII -> 
+I   ␠  b   u   i   l   d   ␠  s   o   f   t   w   a   r   e
+73  32  98  117 105 108 100 32  115 111 102 116 119 97  114 101
+
+That’s 16 numbers.
+
+What the model must learn
+That [115,111,102,116,119,97,114,101] means "software"
+That [98,117,105,108,100] means "build"
+That these byte sequences matter together, not individually
+
+So the model has to learn words character by character remember long sequences discover boundaries itself This is inefficient and expensive.
+
+Option B: Tokenization (what we actually do)
+
+Same text: "I build software"
+Tokenized as: ["I", " build", " software"]
+Mapped to IDs: [40, 1723, 10456]
+
+Now the model sees:
+3 semantic units, not 16 bytes meaningful chunks already grouped
+
+Why Tokenization and not ASCII?
+ASCI has representttaion for each charcter from A-Z and a-x also 0-9 and special chars. but it does not have context for meaning, phrases and relation, which makes it
+inefficient. if we add asci and fed it to llms that would have large token size as every char will have  a number so a word will have a large token which is not very 
+ideal. som things such as context of words, phrases and relations in not provided in ascii and also the token size will increase as hell. cause of less efficiency is
+length of tokens and context.
+
+TOKENIZATION?
+each words has token (not every char) for exmaple we have a phrase "i would not help if it would be this way" would will be replaced here with one single representttaion and 
+many such repetations, so every new duplication is merged with eixsiting one and would have same number representttaion. also every phrase and words has context here. let's deep dive 
+
+[
+hola guys👋  
+i'm aayush, I build software in JS/TS, drink coffee ☕ and ship fast 🚀.  
+Price: ₹499 • Users: 1,024 • Status: OK ✅  
+Code snippet: const sum = (a, b) => a + b;
+नमस्ते from India 🇮🇳    
+]
+
+in Tokenization we just try to find pairs with similar representttaion and assign pair with token
