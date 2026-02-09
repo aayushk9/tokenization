@@ -1,0 +1,5 @@
+hola guys👋  
+i'm aayush, I build software in JS/TS, drink coffee ☕ and ship fast 🚀.  
+Price: ₹499 • Users: 1,024 • Status: OK ✅  
+Code snippet: const sum = (a, b) => a + b;
+नमस्ते from India 🇮🇳
