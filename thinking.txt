@@ -47,4 +47,5 @@ Code snippet: const sum = (a, b) => a + b;
 नमस्ते from India 🇮🇳    
 ]
 
-in Tokenization we just try to find pairs with similar representttaion and assign pair with token
+in Tokenization we just try to find similar chars/words and group them as pair and assgn a representttaion for me them such as if ay apperas multiple times we will
+pair ay as X and use it, what this does is avoids to many chars or duplication and minimizes token size
