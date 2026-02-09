@@ -49,3 +49,25 @@ Code snippet: const sum = (a, b) => a + b;
 
 in Tokenization we just try to find similar chars/words and group them as pair and assgn a representttaion for me them such as if ay apperas multiple times we will
 pair ay as X and use it, what this does is avoids to many chars or duplication and minimizes token size
+
+
+BYTE PAIR ENDCODING??
+so whatever we talked above was to term about bpe in simple terms. let's read what wiki has to say: our goal is to reduce token count so that i/p tokens and eventually
+o/p tokens are reduces so as a user we can use llms for longest of period. if using less tokens per conversation cycle -> long conversations else -> shorter
+
+so if input consists words such as aaabdaaabac  so originally bpe algorithm was used to compress text of string into smaller strings by creating pairs and assinging them single char and 
+performing bpe unless no pair is been found lets psuedo this out
+
+
+data -> [aaabdaaabac]
+
+step 1 -> finding pairs which are clubbed together and assign them with X
+step 2 -> aa = x
+step 3 -> XabdXabac [perfomed bpe for first time]
+step 4 -> Xa = Z so -> ZbdZbac [bpe for second time as we had scope for finding pair/char which was repeating and could be paired]
+step 5 -> Zb = Y so -> YdYac [bpe]
+step 6 -> exit bpe as no scope for pairing and assinging
+
+FROM WIKIPEDIA -->> This data cannot be compressed further by byte-pair encoding because there are no pairs of bytes that occur more than once.To decompress the data, simply perform the replacements in the reverse order.
+
+so we came from aaabdaaabac to YdYac [reduction of characters size will eventually reduce the size of tokens]
