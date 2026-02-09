@@ -71,3 +71,19 @@ step 6 -> exit bpe as no scope for pairing and assinging
 FROM WIKIPEDIA -->> This data cannot be compressed further by byte-pair encoding because there are no pairs of bytes that occur more than once.To decompress the data, simply perform the replacements in the reverse order.
 
 so we came from aaabdaaabac to YdYac [reduction of characters size will eventually reduce the size of tokens]
+
+
+FLOW 
+
+1) RAW BYTES (CHAR REPRESENTATION OF UTF-8 & ASCII FOR EXAMPLE I = 73, J = 79 AND ETC)
+2) PAIRING TWO CHARS NEXT TO EACH OTHER AND COUNTING ITS OCCURING IN DATA SUCH AS 10 [73, 79] WE HAVE GOT ITERATIONS OF I AND J IN DATA AND 10 TIMES IN DATA
+3) NOW A FUNCTION TO PERFROM TOKEN SWAPING OIF THESE PAIRED THING WITH RAW FINAL TOKEN (RECIEVES RAW BYTES [CHAR REPRESENTATION], STORES PAIRING OF BYTES AND APPEARENCE COUNT, NEW TOKENID)
+4) TOKENIZE FUNCTION TO CALL THIS BYTES, PAIRING OPERATING, COUNTS AND ASSIGING IT TO NEW TOKEN ID
+5) ENCODING AND DECODING USING THIS TOKENIZE FUNCTION
+
+THIS IS HOW WE TOKENIZE USER PROVIDED INPUT FROM RAW TEXT TO COMPRESSED [NUMBERS] FORM FOR LLMS TO UNDERSTAND 
+THE STEP OF data -> [aaabdaaabac] RAW TEXT -> CONVERT TO UTF-8 
+WE IETRATE THROUGH PAIRS [NUM1, NUM2] AND OCCURING
+step 1 -> finding pairs which are clubbed together and assign them with X 
+step 2 -> aa = x REPLACE PAIRINGSTATE = TOKENID i.e aa = x equivalent to replacing pairedStateAndItsOccuring with new tokenId
+step 3 -> XabdXabac [perfomed bpe for first time]
